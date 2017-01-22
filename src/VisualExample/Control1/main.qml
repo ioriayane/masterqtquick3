@@ -104,6 +104,7 @@ ApplicationWindow {
 
             ProgressBar {
                 id: progressBar1
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 value: 0.5
             }
 
@@ -114,10 +115,12 @@ ApplicationWindow {
 
             BusyIndicator {
                 id: busyIndicator1
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             }
 
             RowLayout {
                 id: rowLayout1
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 spacing: 10
 
                 Switch {
