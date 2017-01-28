@@ -7,7 +7,7 @@ ApplicationWindow {
     visible: true
     width: 500
     height: 400
-    title: qsTr("Mix Example")
+    title: qsTr("Mix Example(same file)")
 
     GridLayout {
         anchors.rightMargin: 10
