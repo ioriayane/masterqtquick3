@@ -15,17 +15,17 @@ Item {
     }
     RadioButton {
       id: radioButton
-      text: qsTr("Aqusis religious")
+      text: qsTr("Another world")
       exclusiveGroup: choiceReligious
       checked: true
     }
     RadioButton {
       id: radioButton1
-      text: qsTr("Elis religious")
+      text: qsTr("Heaven")
       exclusiveGroup: choiceReligious
     }
     Button {
-      text: qsTr("Join")
+      text: qsTr("Go")
       Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
       onClicked: root.choiced(choiceReligious.current.text)
     }
