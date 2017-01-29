@@ -4,17 +4,15 @@ import QtQuick.Layouts 1.1
 
 ApplicationWindow {
     visible: true
-    width: 550
+    width: 500
     height: 400
-    title: qsTr("Mix Example(separate files)")
+    title: qsTr("Mix Example(separate file)")
 
     SwipeView {
         id: swipeView
         anchors.fill: parent
 
         RowLayout {
-//            spacing: 0
-            //            anchors.fill: parent
             Controls1 {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -37,7 +35,6 @@ ApplicationWindow {
             Label {
                 id: joinedLabel
                 anchors.centerIn: parent
-                //                anchors.centerIn: parent
             }
             Button {
                 anchors.horizontalCenter: parent.horizontalCenter
