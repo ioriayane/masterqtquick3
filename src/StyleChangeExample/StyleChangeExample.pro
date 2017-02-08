@@ -1,4 +1,5 @@
 TEMPLATE = subdirs
 
-SUBDIRS += ChangeByCPP
+SUBDIRS += ChangeByCPP \
+    ChangeByConf
 SUBDIRS += ChangeByArg

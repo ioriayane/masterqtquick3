@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>+windows/qtquickcontrols2.conf</file>
+        <file>+osx/qtquickcontrols2.conf</file>
+        <file>+linux/qtquickcontrols2.conf</file>
+        <file>+windows/+ja_JP/qtquickcontrols2.conf</file>
+    </qresource>
+</RCC>
