@@ -1,5 +1,6 @@
 TEMPLATE = subdirs
 
 SUBDIRS += ChangeByCPP \
-    ChangeByConf
-SUBDIRS += ChangeByArg
+    ChangeByConf \
+    CustomByQML \
+    ChangeByArg
