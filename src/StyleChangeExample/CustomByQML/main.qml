@@ -2,6 +2,7 @@ import QtQuick 2.8
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.2
 import QtQuick.Controls.Material 2.1
+import QtQuick.Controls.Universal 2.1
 
 ApplicationWindow {
   visible: true
@@ -10,6 +11,27 @@ ApplicationWindow {
   title: qsTr("Style Change Example")
 
   Material.theme: Material.Dark
+  Material.accent: Material.DeepOrange
+  Material.primary: Material.DeepPurple
+  Material.foreground: Material.LightBlue
+//  Material.background: Material.Green
+//  Material.elevation: 0
+
+  Universal.theme: Universal.Dark
+  Universal.accent: Universal.Cobalt
+  Universal.foreground: Universal.Amber
+//  Universal.background: Universal.Taupe
+
+  header: ToolBar {
+    RowLayout {
+      ToolButton {
+        text: ">>"
+      }
+      Label {
+        text: title
+      }
+    }
+  }
 
   GridLayout {
     id: gridLayout1
@@ -36,7 +58,6 @@ ApplicationWindow {
         text: qsTr("Button")
       }
     }
-
     ColumnLayout {
       id: columnLayout3
       width: 100
@@ -57,7 +78,6 @@ ApplicationWindow {
             id: checkBox1
             text: qsTr("Check Box")
           }
-
           CheckBox {
             id: checkBox2
             text: qsTr("Check Box")
@@ -71,6 +91,7 @@ ApplicationWindow {
         Layout.fillHeight: true
         Layout.fillWidth: true
         title: qsTr("Group Box")
+        Material.accent: Material.LightBlue
 
         ColumnLayout {
           id: columnLayout2
@@ -81,12 +102,6 @@ ApplicationWindow {
             text: qsTr("Radio Button")
             checked: true
           }
-
-          RadioButton {
-            id: radioButton3
-            text: qsTr("Radio Button")
-          }
-
           RadioButton {
             id: radioButton2
             text: qsTr("Radio Button")
