@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>ProgressBarEx.qml</file>
+        <file>+windows/+material/ProgressBarEx.qml</file>
+    </qresource>
+</RCC>
