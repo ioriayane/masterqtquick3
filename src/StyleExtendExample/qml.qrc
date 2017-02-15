@@ -4,5 +4,10 @@
         <file>qtquickcontrols2.conf</file>
         <file>ProgressBarEx.qml</file>
         <file>+windows/+material/ProgressBarEx.qml</file>
+        <file>+osx/ProgressBarEx.qml</file>
+        <file>+osx/+ja_JP/+material/ProgressBarEx.qml</file>
+        <file>+osx/+ja_JP/+universal/ProgressBarEx.qml</file>
+        <file>+osx/+ja_JP/ProgressBarEx.qml</file>
+        <file>+osx/+en_US/ProgressBarEx.qml</file>
     </qresource>
 </RCC>

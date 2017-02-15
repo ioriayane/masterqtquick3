@@ -9,7 +9,7 @@ ColumnLayout {
 
   spacing: 1
   Label {
-    text: "Default %1%".arg(Math.round(progress.position*100))
+    text: "OSX ja_JP %1%".arg(Math.round(progress.position*100))
     Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
   }
   ProgressBar {
