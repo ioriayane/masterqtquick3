@@ -3,20 +3,29 @@ import QtQuick.Templates 2.1 as T
 
 T.TabBar {
   id: root
-  implicitWidth: 200
   implicitHeight: contentItem.implicitHeight
 
   contentItem: ListView {
-      implicitWidth: contentWidth
-      implicitHeight: currentItem.implicitHeight
+    implicitWidth: contentWidth
+    implicitHeight: currentItem.implicitHeight
 
-      model: root.contentModel
-      currentIndex: root.currentIndex
+    model: root.contentModel
+    currentIndex: root.currentIndex
 
-      spacing: root.spacing
-      orientation: ListView.Horizontal
-  }
-  background: Rectangle {
-      color: "#eeeeee"
+    orientation: ListView.Horizontal
+    highlightMoveDuration: 250
+    highlightResizeDuration: 0
+    highlightFollowsCurrentItem: true
+
+    highlight: Item {
+      z: 10
+      Rectangle {
+        anchors.fill: parent
+        anchors.margins: 1
+        border.color: "#ddc29a"
+        border.width: 1
+        color: "#00ffffff"
+      }
+    }
   }
 }
