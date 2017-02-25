@@ -16,6 +16,9 @@ public:
 
   int theme() const;
 
+  QList<OriginalStyle *> childStyles() const;
+  void setChildStyles(const QList<OriginalStyle *> &childStyles);
+
 signals:
 
   void themeChanged(int theme);
@@ -25,6 +28,13 @@ public slots:
 
 private:
   int m_theme;
+
+  OriginalStyle *m_parentStyle;
+  QList<OriginalStyle *> m_childStyles;
+  void init();
+  void setParentStyle(OriginalStyle *style);
+  void parentStyleChange(OriginalStyle *newParent, OriginalStyle *oldParent);
+  void propagateTheme();
 };
 
 QML_DECLARE_TYPEINFO(OriginalStyle, QML_HAS_ATTACHED_PROPERTIES)
