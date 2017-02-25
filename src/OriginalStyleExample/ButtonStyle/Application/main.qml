@@ -4,9 +4,9 @@ import QtQuick.Layouts 1.0
 
 ApplicationWindow {
   visible: true
-  width: 640
-  height: 480
-  title: qsTr("Hello World")
+  width: 500
+  height: 400
+  title: qsTr("Orignal Style Example")
 
   SwipeView {
     id: swipeView
