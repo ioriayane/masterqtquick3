@@ -18,7 +18,7 @@ ApplicationWindow {
     currentIndex: tabBar.currentIndex
 
     Page1 {
-      button1.onClicked: console.log("theme:" + OriginalStyle.theme)
+      button1.onClicked: console.log("theme:" + root.OriginalStyle.theme)
     }
 
     Item {
