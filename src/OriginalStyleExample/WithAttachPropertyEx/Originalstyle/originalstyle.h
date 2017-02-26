@@ -3,37 +3,36 @@
 
 #include <QObject>
 #include <QtQml>
+#include "originalstyleattached.h"
 
-class OriginalStyle : public QObject
+class OriginalStyle : public OriginalStyleAttached
 {
   Q_OBJECT
   Q_PROPERTY(int theme READ theme WRITE setTheme NOTIFY themeChanged)
 
 public:
-  explicit OriginalStyle(QObject *parent = 0);
+  explicit OriginalStyle(QObject *parent = nullptr);
 
   static OriginalStyle *qmlAttachedProperties(QObject *object);
 
   int theme() const;
-
-  QList<OriginalStyle *> childStyles() const;
-  void setChildStyles(const QList<OriginalStyle *> &childStyles);
+  void setTheme(int theme);
+  void setThemeByInherit(int theme);
 
 signals:
 
   void themeChanged(int theme);
 
 public slots:
-  void setTheme(int theme);
+
+protected:
+  virtual void parentStyleChange(OriginalStyleAttached *style) override;
 
 private:
   int m_theme;
+  bool m_explicitTheme; //代入やバインディングで設定されたか
 
-  OriginalStyle *m_parentStyle;
-  QList<OriginalStyle *> m_childStyles;
   void init();
-  void setParentStyle(OriginalStyle *style);
-  void parentStyleChange(OriginalStyle *newParent, OriginalStyle *oldParent);
   void propagateTheme();
 };
 
