@@ -1,15 +1,12 @@
 #include "originalstyle.h"
-
 #include <QQuickItem>
 #include <QQuickWindow>
-#include <QDebug>
 
 OriginalStyle::OriginalStyle(QObject *parent)
   : OriginalStyleAttached(parent)
   , m_theme(0)
   , m_explicitTheme(false)
 {
-  qDebug() << "attached:" << this;
   init();
 }
 //アタッチするときにインスタンス作成
@@ -20,7 +17,6 @@ OriginalStyle *OriginalStyle::qmlAttachedProperties(QObject *object)
 //値の取得
 int OriginalStyle::theme() const
 {
-  qDebug() << "  get:" << m_theme;
   return m_theme;
 }
 //通常の値設定
@@ -29,12 +25,11 @@ void OriginalStyle::setTheme(int theme)
   m_explicitTheme = true;
   if (m_theme == theme)  return;
 
-  qDebug() << "  set:" << theme;
   m_theme = theme;
   propagateTheme();
   emit themeChanged(theme);
 }
-//継承によって値を設定する
+//継承によって値を設定
 void OriginalStyle::setThemeByInherit(int theme)
 {
   if (m_explicitTheme || m_theme == theme) return;

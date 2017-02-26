@@ -12,14 +12,11 @@ public:
 
   QList<OriginalStyleAttached *> childStyles() const;
   void setChildStyles(const QList<OriginalStyleAttached *> &childStyles);
-
   OriginalStyleAttached *parentStyle() const;
   void setParentStyle(OriginalStyleAttached *style);
 
 signals:
-
 public slots:
-
 protected:
   void init();
   virtual void parentStyleChange(OriginalStyleAttached *style) = 0;
