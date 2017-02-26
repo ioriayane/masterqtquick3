@@ -3,33 +3,44 @@
 
 #include <QObject>
 #include <QtQml>
+#include <QColor>
 #include "originalstyleattached.h"
 
 class OriginalStyle : public OriginalStyleAttached
 {
   Q_OBJECT
-  Q_PROPERTY(int theme READ theme WRITE setTheme NOTIFY themeChanged)
+  Q_PROPERTY(Theme theme READ theme WRITE setTheme NOTIFY themeChanged)
+  Q_PROPERTY(QColor basicColor READ basicColor NOTIFY basicColorChanged)
 
 public:
-  explicit OriginalStyle(QObject *parent = nullptr);
+  enum Theme {
+    Red,
+    Blue
+  };
+  Q_ENUM(Theme)
 
+  explicit OriginalStyle(QObject *parent = nullptr);
+  //アタッチするときにインスタンス作成
   static OriginalStyle *qmlAttachedProperties(QObject *object);
 
-  int theme() const;
-  void setTheme(int theme);
-  void setThemeByInherit(int theme);
+  //テーマ
+  Theme theme() const;
+  void setTheme(Theme theme);
+  void setThemeByInherit(Theme theme);
+  //基本色
+  QColor basicColor() const;
 
 signals:
-
   void themeChanged(int theme);
+  void basicColorChanged(QColor basicColor);
 
 public slots:
-
 protected:
+  //親のスタイル変化を反映
   virtual void parentStyleChange(OriginalStyleAttached *style) override;
 
 private:
-  int m_theme;
+  Theme m_theme;
   bool m_explicitTheme; //代入やバインディングで設定されたか
 
   void init();

@@ -18,8 +18,6 @@ static OriginalStyleAttached *findParentStyle(const QMetaObject *type, QObject *
 {
   QObject *parent = object->parent();
   while (parent) {
-    qDebug() << "classname:" << type->className()
-             << "/" <<  parent->metaObject()->className();
     //その他のエレメントの場合
     OriginalStyleAttached *style = attachedStyle(type, parent);
     if (style)
