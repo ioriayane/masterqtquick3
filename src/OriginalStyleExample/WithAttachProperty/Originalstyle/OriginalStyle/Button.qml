@@ -1,16 +1,17 @@
 import QtQuick 2.8
-import QtQuick.Templates 2.1 as T     // [1]
+import QtQuick.Templates 2.1 as T
 import QtQuick.Layouts 1.2
+import OriginalStyle 1.0            // [1]
 
 T.Button {
   id: root
-  //サイズ                               // [2]
+  //サイズ
   implicitWidth: padding + layout.spacing
                  + mark.width + text.contentWidth * 1.5
   implicitHeight: topPadding + bottomPadding + contentItem.implicitHeight
   padding: 10
 
-  //前景（ボタン上に配置する文字など）           // [3]
+  //前景（ボタン上に配置する文字など）
   contentItem: RowLayout {
     id: layout
     //文字の左の○印
@@ -47,14 +48,15 @@ T.Button {
     id: rect
     border.color: "#ddc29a"
     border.width: 2
-    color: "#5d150a"
+    color: OriginalStyle.basicColor
     //2重の枠線を引くために入れ子
     Rectangle {
       anchors.fill: parent
       anchors.margins: parent.border.width*2
       border.color: "#ddc29a"
       border.width: 1
-      color: !root.enabled ? "#5e3931" : (root.pressed ? "#811d0e" : "#5d150a")
+      color: !root.enabled ? "#5e3931" :
+                             (root.pressed ? "#811d0e" : OriginalStyle.basicColor)
     }
   }
 }

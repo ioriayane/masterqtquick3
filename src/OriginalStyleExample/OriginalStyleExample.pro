@@ -1,5 +1,4 @@
 TEMPLATE = subdirs
 
-SUBDIRS += ButtonStyle \
-           WithAttachProperty \
-           WithAttachPropertyEx
+SUBDIRS += BasicStyle \
+           WithAttachProperty

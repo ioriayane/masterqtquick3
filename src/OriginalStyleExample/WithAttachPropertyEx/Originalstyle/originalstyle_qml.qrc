@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>OriginalStyle/Button.qml</file>
-        <file>OriginalStyle/ApplicationWindow.qml</file>
-        <file>OriginalStyle/TabButton.qml</file>
-        <file>OriginalStyle/TabBar.qml</file>
-        <file>OriginalStyle/TextField.qml</file>
-    </qresource>
-</RCC>

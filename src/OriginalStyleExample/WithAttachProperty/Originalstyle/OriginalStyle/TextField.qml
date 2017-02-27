@@ -1,6 +1,7 @@
 import QtQuick 2.8
 import QtQuick.Templates 2.1 as T
 import QtQuick.Layouts 1.2
+import OriginalStyle 1.0
 
 T.TextField {
   id: root
@@ -8,11 +9,11 @@ T.TextField {
   implicitHeight: topPadding + bottomPadding + contentHeight
   padding: 10
   verticalAlignment: TextInput.AlignVCenter
-  color: "#641b0b"
+  color: OriginalStyle.basicColor
   //カーソル
   cursorDelegate: Rectangle {
     id: cursor
-    color: "#641b0b"
+    color: OriginalStyle.basicColor
     width: 1
     visible: root.activeFocus && root.selectionStart === root.selectionEnd
     //点滅のタイマー
@@ -47,7 +48,7 @@ T.TextField {
       anchors.bottom: parent.bottom
       height: root.activeFocus ? 2 : 1
       radius: 1
-      color: "#5d150a"
+      color: OriginalStyle.basicColor
     }
   }
 }

@@ -1,6 +1,7 @@
 import QtQuick 2.8
 import QtQuick.Templates 2.1 as T
 import QtQuick.Layouts 1.2
+import OriginalStyle 1.0
 
 T.TabButton {
   id: root
@@ -40,16 +41,16 @@ T.TabButton {
   //背景（ボタンっぽい形など）
   background: Rectangle {
     id: rect
-    border.color: "#5d150a"
+    border.color: OriginalStyle.basicColor
     border.width: 2
-    color: "#5d150a"
+    color: OriginalStyle.basicColor
     Rectangle {
       id: inrect
       anchors.fill: parent
       anchors.margins: parent.border.width*2
       border.color: "#ddc29a"
       border.width: 1
-      color: root.pressed ? "#811d0e" : "#5d150a"
+      color: root.pressed ? "#811d0e" : OriginalStyle.basicColor
     }
   }
 }
