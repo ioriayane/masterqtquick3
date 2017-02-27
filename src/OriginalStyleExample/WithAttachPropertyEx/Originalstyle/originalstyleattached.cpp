@@ -1,7 +1,6 @@
 #include "originalstyleattached.h"
 #include <QQuickItem>
 #include <QQuickWindow>
-#include <QDebug>
 
 OriginalStyleAttached::OriginalStyleAttached(QObject *parent)
   : QObject(parent)
@@ -21,13 +20,8 @@ static OriginalStyleAttached *attachedStyle(const QMetaObject *type, QObject *ob
 //親エレメントに設定されたスタイルを探す
 static OriginalStyleAttached *findParentStyle(const QMetaObject *type, QObject *object)
 {
-  qDebug() << "type:" << type->className();
-  qDebug() << "object:" << object;
-
   QObject *parent = object->parent();
   while (parent) {
-    qDebug() << "  parent" << parent;
-    qDebug() << "    parent->parent()" << parent->parent();
     //大抵のエレメントの場合
     OriginalStyleAttached *style = attachedStyle(type, parent);
     if (style)
@@ -35,16 +29,11 @@ static OriginalStyleAttached *findParentStyle(const QMetaObject *type, QObject *
     //今回が最後のとき（Popupの子供はitem->window()==nullだけど辿ると見える）
     QQuickItem *parent_item = qobject_cast<QQuickItem *>(parent);
     if (parent_item) {
-      qDebug() << "    parent_item->parent()" << parent_item->parent();
-      qDebug() << "    parent_item->parentItem()" << parent_item->parentItem();
-      qDebug() << "    parent_item->window()" << parent_item->window();
       if (parent->parent() == nullptr) {
         style = attachedStyle(type, parent_item->window());
         if (style)
           return style;
       }
-    } else {
-      qDebug() << "    parent_item:null";
     }
     parent = parent->parent();
   }
@@ -54,7 +43,6 @@ static OriginalStyleAttached *findParentStyle(const QMetaObject *type, QObject *
 static QList<OriginalStyleAttached *> findChildStyles(const QMetaObject *type, QObject *object)
 {
   QList<OriginalStyleAttached *> children;
-
   QQuickItem *item = qobject_cast<QQuickItem *>(object);
   if (!item) {
     //Window系エレメントの子を探す
@@ -118,12 +106,11 @@ void OriginalStyleAttached::init()
 {
   OriginalStyleAttached *style = findParentStyle(metaObject(), parent());
   if (style) {
-    qDebug() << "found parent:" << style << this;
+    //親を登録
     setParentStyle(style);
   }
   const QList<OriginalStyleAttached *> children = findChildStyles(metaObject(), parent());
   for (OriginalStyleAttached *child : children) {
-    qDebug() << "found child:" << child << this;
     //見つかった子に自分が親だと登録させる
     child->setParentStyle(this);
   }
