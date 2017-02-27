@@ -1,12 +1,14 @@
 #include "originalstyle.h"
 #include <QQuickItem>
 #include <QQuickWindow>
+#include <QDebug>
 
 OriginalStyle::OriginalStyle(QObject *parent)
   : OriginalStyleAttached(parent)
   , m_theme(Theme::Red)
   , m_explicitTheme(false)
 {
+  qDebug() << "attach" << this;
   init();
 }
 //アタッチするときにインスタンス作成
@@ -24,6 +26,7 @@ OriginalStyle::Theme OriginalStyle::theme() const
 void OriginalStyle::setTheme(Theme theme)
 {
   m_explicitTheme = true;
+  qDebug() << "set:" << m_theme << "->" << theme << this;
   if (m_theme == theme)
     return;
   m_theme = theme;
@@ -36,6 +39,7 @@ void OriginalStyle::setThemeByInherit(Theme theme)
 {
   if (m_explicitTheme || m_theme == theme)
     return;
+  qDebug() << "set_i:" << m_theme << "->" << theme << this;
   m_theme = theme;
   propagateTheme();
   emit themeChanged(theme);
@@ -54,6 +58,7 @@ QColor OriginalStyle::basicColor() const
 //親の情報が変更されたときに呼び出されて自分の情報を変更
 void OriginalStyle::parentStyleChange(OriginalStyleAttached *style)
 {
+  qDebug() << "parent style change" << this;
   OriginalStyle *original = qobject_cast<OriginalStyle *>(style);
   if (original)
     setThemeByInherit(original->theme());

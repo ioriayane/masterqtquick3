@@ -1,6 +1,7 @@
 #include "originalstyleattached.h"
 #include <QQuickItem>
 #include <QQuickWindow>
+#include <QDebug>
 
 OriginalStyleAttached::OriginalStyleAttached(QObject *parent)
   : QObject(parent)
@@ -20,18 +21,30 @@ static OriginalStyleAttached *attachedStyle(const QMetaObject *type, QObject *ob
 //親エレメントに設定されたスタイルを探す
 static OriginalStyleAttached *findParentStyle(const QMetaObject *type, QObject *object)
 {
+  qDebug() << "type:" << type->className();
+  qDebug() << "object:" << object;
+
   QObject *parent = object->parent();
   while (parent) {
-    //その他のエレメントの場合
+    qDebug() << "  parent" << parent;
+    qDebug() << "    parent->parent()" << parent->parent();
+    //大抵のエレメントの場合
     OriginalStyleAttached *style = attachedStyle(type, parent);
     if (style)
       return style;
-    //Windows系のエレメントの場合
+    //今回が最後のとき（Popupの子供はitem->window()==nullだけど辿ると見える）
     QQuickItem *parent_item = qobject_cast<QQuickItem *>(parent);
     if (parent_item) {
-      style = attachedStyle(type, parent_item->window());
-      if (style)
-        return style;
+      qDebug() << "    parent_item->parent()" << parent_item->parent();
+      qDebug() << "    parent_item->parentItem()" << parent_item->parentItem();
+      qDebug() << "    parent_item->window()" << parent_item->window();
+      if (parent->parent() == nullptr) {
+        style = attachedStyle(type, parent_item->window());
+        if (style)
+          return style;
+      }
+    } else {
+      qDebug() << "    parent_item:null";
     }
     parent = parent->parent();
   }
@@ -105,10 +118,12 @@ void OriginalStyleAttached::init()
 {
   OriginalStyleAttached *style = findParentStyle(metaObject(), parent());
   if (style) {
+    qDebug() << "found parent:" << style << this;
     setParentStyle(style);
   }
   const QList<OriginalStyleAttached *> children = findChildStyles(metaObject(), parent());
   for (OriginalStyleAttached *child : children) {
+    qDebug() << "found child:" << child << this;
     //見つかった子に自分が親だと登録させる
     child->setParentStyle(this);
   }
