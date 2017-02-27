@@ -25,6 +25,14 @@ protected:
 private:
   QPointer<OriginalStyleAttached> m_parentStyle;
   QList<OriginalStyleAttached *> m_childStyles;
+
+  OriginalStyleAttached *attachedStyle(const QMetaObject *type,
+                                       QObject *object,
+                                       bool create = false);
+  OriginalStyleAttached *findParentStyle(const QMetaObject *type,
+                                         QObject *object);
+  QList<OriginalStyleAttached *> findChildStyles(const QMetaObject *type,
+                                                 QObject *object);
 };
 
 #endif // ORIGINALSTYLEATTACHED_H

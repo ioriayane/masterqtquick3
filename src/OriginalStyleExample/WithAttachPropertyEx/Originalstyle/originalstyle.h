@@ -9,6 +9,7 @@
 class OriginalStyle : public OriginalStyleAttached
 {
   Q_OBJECT
+  //QMLに公開するプロパティ
   Q_PROPERTY(Theme theme READ theme WRITE setTheme NOTIFY themeChanged)
   Q_PROPERTY(QColor basicColor READ basicColor NOTIFY basicColorChanged)
 

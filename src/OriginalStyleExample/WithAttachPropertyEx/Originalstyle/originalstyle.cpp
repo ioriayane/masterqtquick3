@@ -9,7 +9,7 @@ OriginalStyle::OriginalStyle(QObject *parent)
 {
   init();
 }
-//アタッチするときにインスタンス作成
+//アタッチするときにインスタンス作成                       [1]
 OriginalStyle *OriginalStyle::qmlAttachedProperties(QObject *object)
 {
   return new OriginalStyle(object);
@@ -19,7 +19,7 @@ OriginalStyle::Theme OriginalStyle::theme() const
 {
   return m_theme;
 }
-//テーマ（通常の値設定）
+//テーマ（通常の値設定）                             [2]
 void OriginalStyle::setTheme(Theme theme)
 {
   m_explicitTheme = true;
@@ -30,7 +30,7 @@ void OriginalStyle::setTheme(Theme theme)
   emit themeChanged(theme);
   emit basicColorChanged(basicColor());
 }
-//テーマ（継承によって値を設定）
+//テーマ（継承によって値を設定）                         [3]
 void OriginalStyle::setThemeByInherit(Theme theme)
 {
   if (m_explicitTheme || m_theme == theme)
@@ -40,7 +40,7 @@ void OriginalStyle::setThemeByInherit(Theme theme)
   emit themeChanged(theme);
   emit basicColorChanged(basicColor());
 }
-//基本色
+//基本色                                        [4]
 QColor OriginalStyle::basicColor() const
 {
   if (theme() == Red)
@@ -48,7 +48,7 @@ QColor OriginalStyle::basicColor() const
   else
     return QColor(0x0a, 0x15, 0x5d);
 }
-//親の情報が変更されたときに呼び出されて自分の情報を変更
+//親の情報が変更されたときに呼び出されて自分の情報を変更       [5]
 void OriginalStyle::parentStyleChange(OriginalStyleAttached *style)
 {
   OriginalStyle *original = qobject_cast<OriginalStyle *>(style);
@@ -61,7 +61,7 @@ void OriginalStyle::init()
   //もし環境変数で設定したいなら、このあたりで読み込む
   OriginalStyleAttached::init();
 }
-//自分に設定したテーマを子供へ伝える
+//自分に設定したテーマを子供へ伝える                     [6]
 void OriginalStyle::propagateTheme()
 {
   for (OriginalStyleAttached *child : childStyles()) {
