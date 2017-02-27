@@ -6,6 +6,10 @@ OriginalStyleAttached::OriginalStyleAttached(QObject *parent)
   : QObject(parent)
 {
 }
+OriginalStyleAttached::~OriginalStyleAttached()
+{
+  setParentStyle(nullptr);
+}
 //エレメントにアタッチしているスタイルを取得
 static OriginalStyleAttached *attachedStyle(const QMetaObject *type, QObject *object, bool create = false)
 {
@@ -108,4 +112,8 @@ void OriginalStyleAttached::init()
     //見つかった子に自分が親だと登録させる
     child->setParentStyle(this);
   }
+}
+void OriginalStyleAttached::parentStyleChange(OriginalStyleAttached *style)
+{
+  Q_UNUSED(style);
 }

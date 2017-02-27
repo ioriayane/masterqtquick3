@@ -9,6 +9,7 @@ class OriginalStyleAttached : public QObject
   Q_OBJECT
 public:
   explicit OriginalStyleAttached(QObject *parent = nullptr);
+  ~OriginalStyleAttached();
 
   QList<OriginalStyleAttached *> childStyles() const;
   void setChildStyles(const QList<OriginalStyleAttached *> &childStyles);
@@ -19,7 +20,7 @@ signals:
 public slots:
 protected:
   void init();
-  virtual void parentStyleChange(OriginalStyleAttached *style) = 0;
+  virtual void parentStyleChange(OriginalStyleAttached *style);
 
 private:
   QPointer<OriginalStyleAttached> m_parentStyle;

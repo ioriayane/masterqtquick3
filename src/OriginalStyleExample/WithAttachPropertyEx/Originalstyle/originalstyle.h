@@ -37,7 +37,7 @@ signals:
 public slots:
 protected:
   //親のスタイル変化を反映
-  virtual void parentStyleChange(OriginalStyleAttached *style) override;
+  void parentStyleChange(OriginalStyleAttached *style) override;
 
 private:
   Theme m_theme;
