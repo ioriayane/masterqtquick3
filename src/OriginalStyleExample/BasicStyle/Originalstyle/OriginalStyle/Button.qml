@@ -2,15 +2,15 @@ import QtQuick 2.8
 import QtQuick.Templates 2.1 as T     // [1]
 import QtQuick.Layouts 1.2
 
-T.Button {
+T.Button {                            // [2]
   id: root
-  //サイズ                               // [2]
+  //サイズ                               // [3]
   implicitWidth: padding + layout.spacing
                  + mark.width + text.contentWidth * 1.5
   implicitHeight: topPadding + bottomPadding + contentItem.implicitHeight
   padding: 10
 
-  //前景（ボタン上に配置する文字など）           // [3]
+  //前景（ボタン上に配置する文字など）           // [4]
   contentItem: RowLayout {
     id: layout
     //文字の左の○印
@@ -39,10 +39,10 @@ T.Button {
       elide: Text.ElideRight
       color: !root.enabled ? "#888888" : (root.hovered ? "#ff4444" : "#ffffff")
       text: root.text
-      font: root.font                 // [4]
+      font: root.font                 // [5]
     }
   }
-  //背景（ボタンっぽい形など）                 // [5]
+  //背景（ボタンっぽい形など）                 // [6]
   background: Rectangle {
     id: rect
     border.color: "#ddc29a"
