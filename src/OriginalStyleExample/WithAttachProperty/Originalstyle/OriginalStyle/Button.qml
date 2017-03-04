@@ -48,7 +48,7 @@ T.Button {
     id: rect
     border.color: "#ddc29a"
     border.width: 2
-    color: OriginalStyle.basicColor
+    color: root.OriginalStyle.basicColor
     //2重の枠線を引くために入れ子
     Rectangle {
       anchors.fill: parent
@@ -56,7 +56,8 @@ T.Button {
       border.color: "#ddc29a"
       border.width: 1
       color: !root.enabled ? "#5e3931" :
-                             (root.pressed ? "#811d0e" : OriginalStyle.basicColor)
+                             (root.pressed ? "#811d0e" :
+                                             root.OriginalStyle.basicColor)
     }
   }
 }

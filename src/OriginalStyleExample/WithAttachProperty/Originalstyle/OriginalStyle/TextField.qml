@@ -9,11 +9,11 @@ T.TextField {
   implicitHeight: topPadding + bottomPadding + contentHeight
   padding: 10
   verticalAlignment: TextInput.AlignVCenter
-  color: OriginalStyle.basicColor
-  //カーソル
+  color: root.OriginalStyle.basicColor
+  //カーソル                               [1]
   cursorDelegate: Rectangle {
     id: cursor
-    color: OriginalStyle.basicColor
+    color: root.OriginalStyle.basicColor
     width: 1
     visible: root.activeFocus && root.selectionStart === root.selectionEnd
     //点滅のタイマー
@@ -39,16 +39,15 @@ T.TextField {
     color: "#ffffff"
     visible: root.length == 0
   }
-  //背景（という下線）
+  //背景（という下線）                         [2]
   background: Item {
-    implicitWidth: 120
     Rectangle {
       anchors.left: parent.left
       anchors.right: parent.right
       anchors.bottom: parent.bottom
       height: root.activeFocus ? 2 : 1
       radius: 1
-      color: OriginalStyle.basicColor
+      color: root.OriginalStyle.basicColor
     }
   }
 }

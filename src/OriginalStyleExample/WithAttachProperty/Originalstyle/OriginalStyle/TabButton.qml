@@ -41,16 +41,16 @@ T.TabButton {
   //背景（ボタンっぽい形など）
   background: Rectangle {
     id: rect
-    border.color: OriginalStyle.basicColor
+    border.color: root.OriginalStyle.basicColor
     border.width: 2
-    color: OriginalStyle.basicColor
+    color: root.OriginalStyle.basicColor
     Rectangle {
       id: inrect
       anchors.fill: parent
       anchors.margins: parent.border.width*2
       border.color: "#ddc29a"
       border.width: 1
-      color: root.pressed ? "#811d0e" : OriginalStyle.basicColor
+      color: root.pressed ? "#811d0e" : root.OriginalStyle.basicColor
     }
   }
 }
