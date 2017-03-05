@@ -1,4 +1,5 @@
 TEMPLATE = subdirs
 
 SUBDIRS += BasicStyle \
-           WithAttachProperty
+           WithAttachProperty \
+	   WithAttachPropertyEx
