@@ -1,7 +1,7 @@
 import QtQuick 2.8
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.0
-import OriginalStyle 1.0
+import OriginalStyle 1.0              // [1]
 
 ApplicationWindow {
   id: root
@@ -10,16 +10,12 @@ ApplicationWindow {
   height: 400
   title: qsTr("Orignal Style Example(dynamic)")
 
-  OriginalStyle.theme: OriginalStyle.Blue
-
   SwipeView {
     id: swipeView
     anchors.fill: parent
     currentIndex: tabBar.currentIndex
-
     Page1 {
     }
-
     Item {
       Label {
         text: qsTr("Second page")
@@ -32,9 +28,11 @@ ApplicationWindow {
     id: tabBar
     currentIndex: swipeView.currentIndex
     TabButton {
+      OriginalStyle.theme: OriginalStyle.Blue
       text: qsTr("First")
     }
     TabButton {
+      OriginalStyle.theme: OriginalStyle.Blue
       text: qsTr("Second")
     }
   }

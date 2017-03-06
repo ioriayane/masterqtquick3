@@ -1,11 +1,9 @@
 RESOURCES += $$PWD/originalstyle_qml.qrc
 
 HEADERS += \
-    $$PWD/originalstyle.h \
-    $$PWD/originalstyleattached.h
+    $$PWD/originalstyle.h
 
 SOURCES += \
-    $$PWD/originalstyle.cpp \
-    $$PWD/originalstyleattached.cpp
+    $$PWD/originalstyle.cpp
 
 INCLUDEPATH += $$PWD
