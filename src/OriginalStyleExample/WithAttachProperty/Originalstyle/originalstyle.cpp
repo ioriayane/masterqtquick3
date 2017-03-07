@@ -26,7 +26,7 @@ void OriginalStyle::setTheme(Theme theme)
   emit themeChanged(theme);
   emit basicColorChanged(basicColor());
 }
-//基本色                                        [3]
+//基本色
 QColor OriginalStyle::basicColor() const
 {
   if (theme() == Red)

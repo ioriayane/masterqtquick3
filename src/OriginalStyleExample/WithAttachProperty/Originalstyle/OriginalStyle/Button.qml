@@ -40,15 +40,15 @@ T.Button {
       elide: Text.ElideRight
       color: !root.enabled ? "#888888" : (root.hovered ? "#ff4444" : "#ffffff")
       text: root.text
-      font: root.font                 // [4]
+      font: root.font
     }
   }
-  //背景（ボタンっぽい形など）                 // [5]
+  //背景（ボタンっぽい形など）
   background: Rectangle {
     id: rect
     border.color: "#ddc29a"
     border.width: 2
-    color: root.OriginalStyle.basicColor
+    color: root.OriginalStyle.basicColor          // [2]
     //2重の枠線を引くために入れ子
     Rectangle {
       anchors.fill: parent
@@ -57,7 +57,7 @@ T.Button {
       border.width: 1
       color: !root.enabled ? "#5e3931" :
                              (root.pressed ? "#811d0e" :
-                                             root.OriginalStyle.basicColor)
+                                             root.OriginalStyle.basicColor) // [3]
     }
   }
 }

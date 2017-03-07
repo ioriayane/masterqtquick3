@@ -28,11 +28,11 @@ ApplicationWindow {
     id: tabBar
     currentIndex: swipeView.currentIndex
     TabButton {
-      OriginalStyle.theme: OriginalStyle.Blue
+      OriginalStyle.theme: OriginalStyle.Blue // [2]
       text: qsTr("First")
     }
     TabButton {
-      OriginalStyle.theme: OriginalStyle.Blue
+      OriginalStyle.theme: OriginalStyle.Blue // [3]
       text: qsTr("Second")
     }
   }
