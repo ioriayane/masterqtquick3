@@ -1,7 +1,7 @@
 import QtQuick 2.8
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.0
-import OriginalStyle 1.0              // [1]
+import OriginalStyle 1.0      // スタイル関連をインポート
 
 ApplicationWindow {
   id: root
@@ -28,11 +28,11 @@ ApplicationWindow {
     id: tabBar
     currentIndex: swipeView.currentIndex
     TabButton {
-      OriginalStyle.theme: OriginalStyle.Blue // [2]
+      OriginalStyle.theme: OriginalStyle.Blue // [1]
       text: qsTr("First")
     }
     TabButton {
-      OriginalStyle.theme: OriginalStyle.Blue // [3]
+      OriginalStyle.theme: OriginalStyle.Blue // [2]
       text: qsTr("Second")
     }
   }

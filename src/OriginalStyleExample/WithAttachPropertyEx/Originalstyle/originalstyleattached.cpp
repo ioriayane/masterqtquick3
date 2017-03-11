@@ -8,6 +8,7 @@ OriginalStyleAttached::OriginalStyleAttached(QObject *parent)
 }
 OriginalStyleAttached::~OriginalStyleAttached()
 {
+  //登録情報を破棄（親から自分を消す）                         [1]
   setParentStyle(nullptr);
 }
 QList<OriginalStyleAttached *> OriginalStyleAttached::childStyles() const
@@ -23,7 +24,8 @@ OriginalStyleAttached *OriginalStyleAttached::parentStyle() const
 {
   return m_parentStyle;
 }
-//親が見つかったら、自分の親として記録しつつ、親の子リストに自分を追加する   [1]
+
+//親が見つかったら、自分の親として記録しつつ、親の子リストに自分を追加する   [2]
 void OriginalStyleAttached::setParentStyle(OriginalStyleAttached *style)
 {
   if(m_parentStyle != style){
@@ -37,7 +39,8 @@ void OriginalStyleAttached::setParentStyle(OriginalStyleAttached *style)
     parentStyleChange(style);
   }
 }
-//初期化（アタッチしている親と子の情報を検索して登録する）              [2]
+
+//初期化（アタッチしている親と子の情報を探索して登録する）              [3]
 void OriginalStyleAttached::init()
 {
   OriginalStyleAttached *style = findParentStyle(metaObject(), parent());
@@ -56,6 +59,7 @@ void OriginalStyleAttached::parentStyleChange(OriginalStyleAttached *style)
 {
   Q_UNUSED(style);
 }
+
 //エレメントにアタッチしているスタイルを取得
 OriginalStyleAttached* OriginalStyleAttached::attachedStyle(
     const QMetaObject *type, QObject *object, bool create)
@@ -66,21 +70,21 @@ OriginalStyleAttached* OriginalStyleAttached::attachedStyle(
         qmlAttachedPropertiesObject(&idx, object, type, create)
         );
 }
-//親エレメントに設定されたスタイルを探す                         [3]
+//親エレメントに設定されたスタイルを探す                         [4]
 OriginalStyleAttached* OriginalStyleAttached::findParentStyle(
     const QMetaObject *type, QObject *object)
 {
   QObject *parent = object->parent();
   while (parent) {
-    //大抵のエレメントの場合                               [4]
+    //大抵のエレメントの場合                               [5]
     OriginalStyleAttached *style = attachedStyle(type, parent);
     if (style)
       return style;
-    //今回が最後のとき                                    [5]
+    //今回が最後のとき                                    [6]
     //（Popupの子供はitem->window()==nullだけど辿ると見える）
-    QQuickItem *parent_item = qobject_cast<QQuickItem *>(parent);
-    if (parent_item) {
-      if (parent->parent() == nullptr) {
+    if (parent->parent() == nullptr) {
+      QQuickItem *parent_item = qobject_cast<QQuickItem *>(parent);
+      if (parent_item) {
         style = attachedStyle(type, parent_item->window());
         if (style)
           return style;
@@ -90,14 +94,15 @@ OriginalStyleAttached* OriginalStyleAttached::findParentStyle(
   }
   return nullptr;
 }
-//子エレメントでアタッチしているスタイルを探す                      [6]
+
+//子エレメントでアタッチしているスタイルを探す                      [7]
 QList<OriginalStyleAttached *> OriginalStyleAttached::findChildStyles(
     const QMetaObject *type, QObject *object)
 {
   QList<OriginalStyleAttached *> children;
   QQuickItem *item = qobject_cast<QQuickItem *>(object);
   if (!item) {
-    //Window系エレメントの子を探す                         [7]
+    //Window系エレメントの子を探す                         [8]
     QQuickWindow *window = qobject_cast<QQuickWindow *>(object);
     if (window) {
       //Window系エレメントの子エレメント
@@ -114,7 +119,7 @@ QList<OriginalStyleAttached *> OriginalStyleAttached::findChildStyles(
       }
     }
   }
-  //その他のエレメントの場合                                [8]
+  //その他のエレメントの場合                                [9]
   if (item) {
     const auto childItems = item->childItems();
     for (QQuickItem *child : childItems) {
@@ -122,7 +127,7 @@ QList<OriginalStyleAttached *> OriginalStyleAttached::findChildStyles(
       if (style)
         children += style;
       else
-        children += findChildStyles(type, child); // [9]
+        children += findChildStyles(type, child); // [10]
     }
   }
   return children;
