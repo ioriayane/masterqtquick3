@@ -95,39 +95,36 @@ OriginalStyleAttached* OriginalStyleAttached::findParentStyle(
   return nullptr;
 }
 
-//子エレメントでアタッチしているスタイルを探す                      [7]
+//子エレメントでアタッチしているスタイルを探す
 QList<OriginalStyleAttached *> OriginalStyleAttached::findChildStyles(
     const QMetaObject *type, QObject *object)
 {
   QList<OriginalStyleAttached *> children;
-  QQuickItem *item = qobject_cast<QQuickItem *>(object);
-  if (!item) {
-    //Window系エレメントの子を探す                         [8]
-    QQuickWindow *window = qobject_cast<QQuickWindow *>(object);
-    if (window) {
-      //Window系エレメントの子エレメント
-      item = window->contentItem();
-      //子になっているWindow系エレメント
-      const auto windowChildren = window->children();
-      for (QObject *child : windowChildren) {
-        QQuickWindow *childWindow = qobject_cast<QQuickWindow *>(child);
-        if (childWindow) {
-          OriginalStyleAttached *style = attachedStyle(type, childWindow);
-          if (style)
-            children += style;
-        }
-      }
+  //子の中からアタッチされているエレメントを探す
+  const auto childObjects = object->children();     //[7]
+  for (QObject *child : childObjects) {
+    OriginalStyleAttached *style = attachedStyle(type, child);
+    if (style){
+      children += style;
+    }else{
+      children += findChildStyles(type, child);
     }
   }
-  //その他のエレメントの場合                                [9]
-  if (item) {
-    const auto childItems = item->childItems();
-    for (QQuickItem *child : childItems) {
-      OriginalStyleAttached *style = attachedStyle(type, child);
-      if (style)
-        children += style;
-      else
-        children += findChildStyles(type, child); // [10]
+  //今回がWindow系エレメントのときの対応
+  QQuickWindow *window = qobject_cast<QQuickWindow *>(object);
+  if (window) {
+    QQuickItem *item = window->contentItem();       //[8]
+    //その他のエレメントの場合
+    if (item) {
+      const auto childItems = item->childItems();   //[9]
+      for (QQuickItem *child : childItems) {
+        OriginalStyleAttached *style = attachedStyle(type, child);
+        if (style){
+          children += style;
+        }else{
+          children += findChildStyles(type, child);
+        }
+      }
     }
   }
   return children;
