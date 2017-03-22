@@ -34,13 +34,8 @@ T.RadioButton {
     anchors.bottom: indicator.bottom
     text: root.text
     font: root.font
-    color: !root.enabled ? "#888888" : "#000000"
+    color: root.enabled ? "#222222" : "#ffffff"
     horizontalAlignment: Text.AlignLeft
     verticalAlignment: Text.AlignVCenter
-
-//    Rectangle {
-//      anchors.fill: parent
-//      color: "gray"
-//    }
   }
 }

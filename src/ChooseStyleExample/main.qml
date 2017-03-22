@@ -9,9 +9,9 @@ ApplicationWindow {
   visible: true
   width: 500
   height: 400
-  title: qsTr("Style Change Example")
+  title: qsTr("Choose Style Example")
 
-  OriginalStyle.theme: OriginalStyle.Blue
+//  OriginalStyle.theme: OriginalStyle.Blue
 
   SwipeView {
     id: swipeView
@@ -38,9 +38,9 @@ ApplicationWindow {
         id: column
         anchors.centerIn: parent
         RadioButton {
-          checked: settings.styleName === styleName        // [4]
+          checked: settings.styleName === styleName
           text: qsTr("Default")
-          property string styleName: "Default"             // [5]
+          property string styleName: "Default"             // [4]
         }
         RadioButton {
           checked: settings.styleName === styleName

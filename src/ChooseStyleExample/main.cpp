@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
         , "OriginalStyle is an attached property");
 
   //設定の読み込み
-  QSettings settings(qobject_cast<QObject *>(&app));                // [3]
+  QSettings settings(&app);                                                   // [3]
   QString styleName = settings.value(QStringLiteral("styleName")
                                      , QStringLiteral("Default")).toString(); // [4]
   QQuickStyle::setStyle(styleName);
