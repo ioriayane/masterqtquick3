@@ -7,11 +7,12 @@
 int main(int argc, char *argv[])
 {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-  QGuiApplication app(argc, argv);
   //設定の保存で使用する情報                          // [2]
-  app.setOrganizationName("Relog");
-  app.setOrganizationDomain("relog.xii.jp");
-  app.setApplicationName("ChooseStyleExample");
+  QGuiApplication::setOrganizationName("Relog");
+  QGuiApplication::setOrganizationDomain("relog.xii.jp");
+  QGuiApplication::setApplicationName("ChooseStyleExample");
+
+  QGuiApplication app(argc, argv);
 
   qmlRegisterUncreatableType<OriginalStyle>(
         "OriginalStyle"
